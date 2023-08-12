@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model customers {
+  id                  Int                  @id @default(autoincrement())
+  name                String               @db.VarChar(64)
+  email               String               @unique @db.VarChar(200)
+  phone_number        String               @db.VarChar(30)
+  cpf                 String               @db.Char(14)
+  cnpj                String               @db.Char(18)
+  company_name        String               @db.VarChar(100)
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  customers_plan_data customers_plan_data?
+  messages            messages[]
+}
+
+model customers_plan_data {
+  id          Int            @id @default(autoincrement())
+  customer_id Int            @unique
+  customer    customers      @relation(fields: [customer_id], references: [id])
+  plan        customer_plans
+  balance     Int            @default(0)
+  limit       Int?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model messages {
+  id               Int       @id @default(autoincrement())
+  from_customer_id Int
+  customer         customers @relation(fields: [from_customer_id], references: [id])
+  to_phone_number  String    @db.VarChar(30)
+  is_whatsapp      Boolean   @default(false)
+  text             String    @db.Text
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+enum customer_plans {
+  PREPAID
+  POSTPAID
+}
