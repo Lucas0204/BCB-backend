@@ -8,6 +8,4 @@ export class Customer {
     company_name: string;
     createdAt: Date;
     updatedAt: Date;
-    // customers_plan_data customers_plan_data?
-    // messages            messages[]
 }

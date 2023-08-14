@@ -1,29 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
-import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { PrismaCustomersRepository } from './repositories/implementations/prisma-customers-repository';
 
 @Injectable()
 export class CustomersService {
+    private readonly logger: Logger = new Logger(CustomersService.name);
+
     constructor(private readonly customersRepository: PrismaCustomersRepository) {}
 
     async create(createCustomerDto: CreateCustomerDto) {
-        return await this.customersRepository.create(createCustomerDto);
+        try {
+            return await this.customersRepository.create(createCustomerDto);
+        } catch (err) {
+            this.logger.error(err);
+            throw err;
+        }
     }
 
-    findAll() {
-        return `This action returns all customers`;
-    }
-
-    findOne(id: number) {
-        return `This action returns a #${id} customer`;
-    }
-
-    update(id: number, updateCustomerDto: UpdateCustomerDto) {
-        return `This action updates a #${id} customer`;
-    }
-
-    remove(id: number) {
-        return `This action removes a #${id} customer`;
+    async getCustomer(id: number) {
+        return this.customersRepository.getCustomer(id);
     }
 }

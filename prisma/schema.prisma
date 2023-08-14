@@ -28,6 +28,7 @@ model customers_plan_data {
   plan        customer_plans
   balance     Int            @default(0)
   limit       Int?
+  debit       Int            @default(0)
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
 }
