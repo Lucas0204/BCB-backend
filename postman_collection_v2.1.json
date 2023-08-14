@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "7b99e242-d1bd-4c03-92f5-a4ee11fb7d58",
+		"name": "BCB app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29110253"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Example Customer",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "example@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "44999999999",
+							"type": "text"
+						},
+						{
+							"key": "cpf",
+							"value": "123.123.123-1",
+							"type": "text"
+						},
+						{
+							"key": "cnpj",
+							"value": "11.011.101/0001-01",
+							"type": "text"
+						},
+						{
+							"key": "company_name",
+							"value": "Company Test",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/customers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/customers/{{customer_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create plan",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "customer_id",
+							"value": "{{customer_id}}",
+							"type": "text"
+						},
+						{
+							"key": "plan",
+							"value": "PREPAID",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/plans",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"plans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get plan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/plans/{{customer_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"plans",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add credit",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "amount",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/plans/add-credit/{{customer_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"plans",
+						"add-credit",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get balance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/plans/balance/{{customer_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"plans",
+						"balance",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change limit",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "limit",
+							"value": "100",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/plans/change-limit/{{customer_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"plans",
+						"change-limit",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change plan",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "plan",
+							"value": "PREPAID",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/plans/change-plan/{{customer_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"plans",
+						"change-plan",
+						"{{customer_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "from_customer_id",
+							"value": "{{customer_id}}",
+							"type": "text"
+						},
+						{
+							"key": "to_phone_number",
+							"value": "44999999999",
+							"type": "text"
+						},
+						{
+							"key": "is_whatsapp",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "text",
+							"value": "example message",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/messages/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"messages",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		}
+	]
+}

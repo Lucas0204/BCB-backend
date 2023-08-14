@@ -6,6 +6,13 @@
 - npm start
 
 
+## Instrucoes para teste
+
+- Importar arquivo postman_collection no postman;
+- Registrar cliente (rota **Register**);
+- Adicionar id do cliente cadastrado com env no postman: **customer_id**;
+
+
 ## Premissas
 
 - Dominios da aplicacao: clientes, mensagens (SMS), assinatura (plano)
