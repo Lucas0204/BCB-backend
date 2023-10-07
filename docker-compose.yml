@@ -1,7 +1,7 @@
 version: '3'
 services:
   postgresql:
-    container_name: postgresql_db
+    container_name: postgresql
     image: postgres:15
     environment:
       - POSTGRES_HOST_AUTH_METHOD="trust"
@@ -9,3 +9,14 @@ services:
       - POSTGRES_PASSWORD="postgres"
     ports:
       - "5432:5432"
+  api:
+    # build: .
+    image: lucaszordan0204/bcb-backend-api
+    environment:
+      - DATABASE_URL=postgresql://postgres@postgresql:5432/postgres?schema=public
+    ports:
+      - "3000:3000"
+    links:
+      - postgresql
+    depends_on:
+      - postgresql
